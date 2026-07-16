@@ -6,6 +6,9 @@ const EstimationContext = createContext(null);
 
 const initialWizardData = {
   projectName: '',
+  teamMemberName: '',
+  portfolio: '',
+  domainTeam: '',
   stage: '',
   weeks: '',
   description: '',

@@ -61,6 +61,18 @@ export default function StepReport() {
               <dd className="font-medium">{wizardData.projectName}</dd>
             </div>
             <div className="flex justify-between text-sm">
+              <dt className="text-gray-600">Team Member:</dt>
+              <dd className="font-medium">{wizardData.teamMemberName}</dd>
+            </div>
+            <div className="flex justify-between text-sm">
+              <dt className="text-gray-600">Portfolio:</dt>
+              <dd className="font-medium">{wizardData.portfolio}</dd>
+            </div>
+            <div className="flex justify-between text-sm">
+              <dt className="text-gray-600">Domain/Team:</dt>
+              <dd className="font-medium">{wizardData.domainTeam}</dd>
+            </div>
+            <div className="flex justify-between text-sm">
               <dt className="text-gray-600">Stage:</dt>
               <dd>
                 <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">

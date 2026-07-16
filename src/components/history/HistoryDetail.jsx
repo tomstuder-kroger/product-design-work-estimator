@@ -104,6 +104,18 @@ export default function HistoryDetail({ estimation }) {
               <dt className="text-sm text-gray-600 mb-1">Project Name</dt>
               <dd className="text-gray-900 font-medium">{estimation.projectName}</dd>
             </div>
+            <div>
+              <dt className="text-sm text-gray-600 mb-1">Team Member</dt>
+              <dd className="text-gray-900 font-medium">{estimation.teamMemberName}</dd>
+            </div>
+            <div>
+              <dt className="text-sm text-gray-600 mb-1">Portfolio</dt>
+              <dd className="text-gray-900 font-medium">{estimation.portfolio}</dd>
+            </div>
+            <div>
+              <dt className="text-sm text-gray-600 mb-1">Domain/Team</dt>
+              <dd className="text-gray-900 font-medium">{estimation.domainTeam}</dd>
+            </div>
             <div className="flex gap-8">
               <div>
                 <dt className="text-sm text-gray-600 mb-1">Stage</dt>

@@ -36,6 +36,11 @@ export default function StepReview() {
           <div>
             <h3 className="font-medium text-gray-900">Project Summary</h3>
             <p className="text-lg mt-2">{wizardData.projectName}</p>
+            <div className="mt-2 space-y-1 text-sm text-gray-600">
+              <p><span className="font-medium">Team Member:</span> {wizardData.teamMemberName}</p>
+              <p><span className="font-medium">Portfolio:</span> {wizardData.portfolio}</p>
+              <p><span className="font-medium">Domain/Team:</span> {wizardData.domainTeam}</p>
+            </div>
             <div className="flex gap-4 mt-2 text-sm text-gray-600">
               <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded">
                 {wizardData.stage}
