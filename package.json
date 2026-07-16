@@ -10,7 +10,8 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.0.0"
+    "react-router-dom": "^6.0.0",
+    "mx-web-components": "^5.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
