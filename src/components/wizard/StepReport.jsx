@@ -27,6 +27,7 @@ export default function StepReport() {
 
   const handleNewEstimation = () => {
     resetWizard();
+    navigate('/');
   };
 
   return (
