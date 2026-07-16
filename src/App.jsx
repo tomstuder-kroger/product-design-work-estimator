@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/common/Layout';
+import DraftRecoveryModal from './components/common/DraftRecoveryModal';
 import WizardPage from './pages/WizardPage';
 import HistoryPage from './pages/HistoryPage';
 import HistoryDetailPage from './pages/HistoryDetailPage';
@@ -7,6 +8,7 @@ import HistoryDetailPage from './pages/HistoryDetailPage';
 function App() {
   return (
     <BrowserRouter>
+      <DraftRecoveryModal />
       <Layout>
         <Routes>
           <Route path="/" element={<WizardPage />} />
