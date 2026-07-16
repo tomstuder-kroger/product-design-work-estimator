@@ -129,6 +129,14 @@ export default function HistoryDetail({ estimation }) {
                   </span>
                 </dd>
               </div>
+              <div>
+                <dt className="text-sm text-gray-600 mb-1">T-Shirt Size</dt>
+                <dd>
+                  <span className="px-2 py-1 text-xs font-medium rounded bg-purple-100 text-purple-800">
+                    {estimation.tShirtSize}
+                  </span>
+                </dd>
+              </div>
               {estimation.weeks && (
                 <div>
                   <dt className="text-sm text-gray-600 mb-1">Duration</dt>

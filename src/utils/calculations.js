@@ -1,14 +1,16 @@
 import { COMPLEXITY_LEVELS } from './constants.js';
 
 /**
- * Calculate story points based on complexity dimensions
+ * Calculate story points based on complexity dimensions, activity count, and duration
  * @param {Object} complexity - {ambiguity, artifactComplexity, stakeholderRisk, iterationLikelihood?}
+ * @param {number} activityCount - Number of selected activities
+ * @param {number} weeks - Duration in weeks
  * @returns {number} Story points (1, 2, 3, 5, 8, or 13)
  */
-export function calculateStoryPoints(complexity) {
+export function calculateStoryPoints(complexity, activityCount = 0, weeks = 0) {
   let total = 0;
 
-  // Sum up complexity scores (Low=1, Medium=2, High=3)
+  // Base Score: Sum up complexity scores (Low=1, Medium=2, High=3)
   if (complexity.ambiguity) {
     total += COMPLEXITY_LEVELS[complexity.ambiguity].value;
   }
@@ -22,12 +24,31 @@ export function calculateStoryPoints(complexity) {
     total += COMPLEXITY_LEVELS[complexity.iterationLikelihood].value;
   }
 
+  // Activity Multiplier: More activities = larger scope
+  if (activityCount >= 8) {
+    total += 3;
+  } else if (activityCount >= 4) {
+    total += 2;
+  } else if (activityCount >= 2) {
+    total += 1;
+  }
+
+  // Duration Factor: Longer timeframes indicate more complexity/unknowns
+  const weeksNum = Number(weeks) || 0;
+  if (weeksNum >= 11) {
+    total += 3;
+  } else if (weeksNum >= 6) {
+    total += 2;
+  } else if (weeksNum >= 3) {
+    total += 1;
+  }
+
   // Map total to Fibonacci scale
   if (total <= 4) return 1;
   if (total <= 6) return 2;
   if (total <= 8) return 3;
-  if (total <= 10) return 5;
-  if (total <= 12) return 8;
+  if (total <= 11) return 5;
+  if (total <= 15) return 8;
   return 13;
 }
 

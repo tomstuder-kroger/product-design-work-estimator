@@ -80,6 +80,14 @@ export default function StepReport() {
                 </span>
               </dd>
             </div>
+            <div className="flex justify-between text-sm">
+              <dt className="text-gray-600">T-Shirt Size:</dt>
+              <dd>
+                <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
+                  {wizardData.tShirtSize}
+                </span>
+              </dd>
+            </div>
             {wizardData.weeks && (
               <div className="flex justify-between text-sm">
                 <dt className="text-gray-600">Duration:</dt>
@@ -130,11 +138,34 @@ export default function StepReport() {
 
         {wizardData.finalPoints === 13 && (
           <div className="border-t pt-6">
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-              <p className="text-amber-900 font-medium">⚠️ Recommendation</p>
-              <p className="text-amber-800 text-sm mt-1">
-                This work may be too large. Consider breaking into smaller Discovery, Define, or Design items.
-              </p>
+            <div className="bg-amber-50 border border-amber-300 rounded-lg p-6">
+              <div className="space-y-3">
+                <p className="text-amber-900 font-semibold text-lg flex items-center gap-2">
+                  <span className="text-2xl">⚠️</span>
+                  Epic-Level Work - Breakdown Recommended
+                </p>
+                <p className="text-amber-800">
+                  This 13-point estimation indicates epic-level complexity. For better estimation accuracy and delivery predictability, consider breaking this work into smaller stories:
+                </p>
+                <div className="bg-white/50 rounded p-4">
+                  <p className="text-amber-900 font-medium text-sm mb-2">Recommended approach:</p>
+                  <ul className="text-amber-800 text-sm space-y-1.5 ml-4">
+                    <li>• Separate Discovery, Define, and Design phases into individual stories</li>
+                    <li>• Split by user journey or feature area</li>
+                    <li>• Identify discrete deliverables that can be estimated independently</li>
+                    <li>• Target each story at 8 points or less</li>
+                  </ul>
+                </div>
+                <div className="bg-amber-100 rounded p-3">
+                  <p className="text-amber-900 text-sm font-medium">Benefits of breaking down epic-level work:</p>
+                  <div className="grid grid-cols-2 gap-2 mt-2 text-sm text-amber-800">
+                    <div>✓ Improved estimation accuracy</div>
+                    <div>✓ Better risk management</div>
+                    <div>✓ Clearer team throughput</div>
+                    <div>✓ More predictable delivery</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}

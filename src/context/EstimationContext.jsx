@@ -10,6 +10,7 @@ const initialWizardData = {
   portfolio: '',
   domainTeam: '',
   stage: '',
+  tShirtSize: '',
   weeks: '',
   description: '',
   activities: [],
@@ -52,7 +53,11 @@ export function EstimationProvider({ children }) {
   };
 
   const calculatePoints = () => {
-    const points = calculateStoryPoints(wizardData.complexity);
+    const points = calculateStoryPoints(
+      wizardData.complexity,
+      wizardData.activities.length,
+      wizardData.weeks
+    );
     setWizardData(prev => ({
       ...prev,
       calculatedPoints: points,

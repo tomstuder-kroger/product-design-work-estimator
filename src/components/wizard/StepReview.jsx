@@ -45,6 +45,9 @@ export default function StepReview() {
               <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded">
                 {wizardData.stage}
               </span>
+              <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded">
+                {wizardData.tShirtSize}
+              </span>
               {wizardData.weeks && <span>{wizardData.weeks} weeks</span>}
             </div>
             {wizardData.description && (
@@ -125,10 +128,43 @@ export default function StepReview() {
           {wizardData.calculatedPoints}
         </div>
         <p className="text-sm text-gray-700">
-          Based on your complexity assessment, this work is estimated at{' '}
+          Based on your complexity assessment ({wizardData.activities.length} activities, {wizardData.weeks || 'no'} weeks), this work is estimated at{' '}
           <strong>{wizardData.calculatedPoints} story points</strong>.
         </p>
       </div>
+
+      {/* Epic-Level Warning */}
+      {wizardData.calculatedPoints === 13 && (
+        <div className="bg-amber-50 border-2 border-amber-300 rounded-lg p-6">
+          <div className="space-y-3">
+            <p className="text-amber-900 font-semibold text-lg flex items-center gap-2">
+              <span className="text-2xl">⚠️</span>
+              Epic-Level Work Detected
+            </p>
+            <p className="text-amber-800">
+              This estimation indicates epic-level complexity. Consider breaking this work into smaller stories:
+            </p>
+            <div className="bg-white/50 rounded p-4">
+              <p className="text-amber-900 font-medium text-sm mb-2">Recommended breakdown approach:</p>
+              <ul className="text-amber-800 text-sm space-y-1.5 ml-4">
+                <li>• Separate Discovery, Define, and Design phases into individual stories</li>
+                <li>• Split by user journey or feature area</li>
+                <li>• Identify discrete deliverables that can be estimated independently</li>
+                <li>• Each resulting story should be 8 points or less</li>
+              </ul>
+            </div>
+            <div className="bg-amber-100 rounded p-3">
+              <p className="text-amber-900 text-sm font-medium">Breaking down large work items improves:</p>
+              <div className="grid grid-cols-2 gap-2 mt-2 text-sm text-amber-800">
+                <div>✓ Estimation accuracy</div>
+                <div>✓ Risk management</div>
+                <div>✓ Team throughput visibility</div>
+                <div>✓ Delivery predictability</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Override Option */}
       <div className="bg-white border rounded-lg p-6 space-y-4">
@@ -172,9 +208,23 @@ export default function StepReview() {
 
             {wizardData.finalPoints === 13 && (
               <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                <p className="text-amber-800 text-sm">
-                  ⚠️ Consider breaking this into smaller items
-                </p>
+                <div className="space-y-2">
+                  <p className="text-amber-900 font-semibold text-sm">
+                    ⚠️ Epic-Level Work Detected
+                  </p>
+                  <p className="text-amber-800 text-sm">
+                    This estimation indicates epic-level complexity. Consider breaking this work into smaller stories:
+                  </p>
+                  <ul className="text-amber-800 text-sm list-disc list-inside space-y-1 ml-2">
+                    <li>Separate Discovery, Define, and Design phases into individual stories</li>
+                    <li>Split by user journey or feature area</li>
+                    <li>Identify discrete deliverables that can be estimated independently</li>
+                    <li>Each resulting story should be 8 points or less</li>
+                  </ul>
+                  <p className="text-amber-800 text-sm font-medium mt-2">
+                    Breaking down large work items improves estimation accuracy, throughput visibility, risk management, and delivery predictability.
+                  </p>
+                </div>
               </div>
             )}
 
