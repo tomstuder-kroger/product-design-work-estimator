@@ -1,12 +1,20 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEstimation } from '../../context/EstimationContext';
 
 export default function Layout({ children }) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { resetWizard } = useEstimation();
 
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path === '/history' && location.pathname.startsWith('/history')) return true;
     return false;
+  };
+
+  const handleNewEstimation = () => {
+    resetWizard();
+    navigate('/');
   };
 
   return (
@@ -18,8 +26,8 @@ export default function Layout({ children }) {
               Story Points Calculator
             </h1>
             <nav className="flex gap-6">
-              <Link
-                to="/"
+              <button
+                onClick={handleNewEstimation}
                 className={`font-medium transition-colors ${
                   isActive('/')
                     ? 'text-blue-600'
@@ -27,7 +35,7 @@ export default function Layout({ children }) {
                 }`}
               >
                 New Estimation
-              </Link>
+              </button>
               <Link
                 to="/history"
                 className={`font-medium transition-colors ${
