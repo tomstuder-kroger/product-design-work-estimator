@@ -24,7 +24,7 @@ export default function WizardStepper() {
             {index < STEPS.length - 1 && (
               <div
                 className={`absolute top-5 left-1/2 w-full h-0.5 ${
-                  currentStep > step.number ? 'bg-blue-600' : 'bg-gray-300'
+                  currentStep > step.number ? 'bg-primary' : 'bg-gray-300'
                 }`}
                 aria-hidden="true"
               />
@@ -41,11 +41,11 @@ export default function WizardStepper() {
               <span
                 className={`h-10 w-10 rounded-full flex items-center justify-center border-2 transition-all ${
                   currentStep === step.number
-                    ? 'border-blue-600 bg-blue-600 text-white'
+                    ? 'border-primary bg-primary text-white'
                     : currentStep > step.number
-                    ? 'border-blue-600 bg-blue-50 text-blue-600'
+                    ? 'border-primary bg-blue-50 text-primary'
                     : 'border-gray-300 bg-white text-gray-500'
-                } ${canNavigateTo(step.number) && currentStep !== step.number ? 'group-hover:border-blue-400' : ''}`}
+                } ${canNavigateTo(step.number) && currentStep !== step.number ? 'group-hover:border-primary' : ''}`}
               >
                 {currentStep > step.number ? (
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
@@ -62,7 +62,7 @@ export default function WizardStepper() {
               <span
                 className={`mt-2 text-xs font-medium ${
                   currentStep === step.number
-                    ? 'text-blue-600'
+                    ? 'text-primary'
                     : currentStep > step.number
                     ? 'text-gray-700'
                     : 'text-gray-500'
