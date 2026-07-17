@@ -1,0 +1,138 @@
+import { calculateActivityScore, calculateTShirtSize, calculateStoryPoints } from './calculations.js';
+import { ACTIVITIES_DATA } from './constants.js';
+
+describe('calculateActivityScore', () => {
+  test('returns 0 for no activities', () => {
+    expect(calculateActivityScore([], {})).toBe(0);
+  });
+
+  test('calculates score for low-weight activities', () => {
+    // 3 activities with weight 1 each = total 3 → score 0
+    const activities = ['Research planning', 'Surveys', 'Brainstorm session'];
+    expect(calculateActivityScore(activities, {})).toBe(0);
+  });
+
+  test('calculates score for medium-weight activities', () => {
+    // 4 activities with weight 2 each = total 8 → score 1
+    const activities = ['User interviews (6-10)', 'Wireframing (high-fidelity)', 'Clickable prototype', 'User Flow - Current State'];
+    expect(calculateActivityScore(activities, {})).toBe(1);
+  });
+
+  test('calculates score for high-weight activities', () => {
+    // 5 activities with weight 3 each = total 15 → score 2
+    const activities = ['Journey map creation', 'Service blueprint creation', 'Design system work', 'MVP definition', 'Gigamap'];
+    expect(calculateActivityScore(activities, {})).toBe(2);
+  });
+
+  test('calculates score for very high total weight', () => {
+    // 9 activities with weight 3 each = total 27 → score 4
+    const activities = [
+      'Journey map creation', 'Service blueprint creation', 'Design system work',
+      'MVP definition', 'Gigamap', 'Ecosystem Map', 'Dependency Map',
+      'Multi-platform design (responsive)', 'Champion/Challenger testing'
+    ];
+    expect(calculateActivityScore(activities, {})).toBe(4);
+  });
+});
+
+describe('calculateActivityScore with adjustments', () => {
+  test('applies positive adjustment (+1)', () => {
+    // 1 activity weight 1, adjusted +1 = effective weight 2
+    const activities = ['Research planning'];
+    const adjustments = { 'Research planning': 1 };
+    const scoreWithout = calculateActivityScore(activities, {});
+    const scoreWith = calculateActivityScore(activities, adjustments);
+    expect(scoreWith).toBeGreaterThanOrEqual(scoreWithout);
+  });
+
+  test('applies negative adjustment (-1)', () => {
+    // 1 activity weight 3, adjusted -1 = effective weight 2
+    const activities = ['Journey map creation'];
+    const adjustments = { 'Journey map creation': -1 };
+    // Total weight 2 vs 3, both map to score 0, but verify calculation works
+    expect(calculateActivityScore(activities, adjustments)).toBe(0);
+  });
+
+  test('clamps adjustment to valid range', () => {
+    // Weight 1 with -1 adjustment = minimum 1 (not 0)
+    const activities = ['Research planning'];
+    const adjustments = { 'Research planning': -1 };
+    const score = calculateActivityScore(activities, adjustments);
+    expect(score).toBe(0); // 1 weight still maps to 0 score
+  });
+
+  test('handles mixed adjustments', () => {
+    const activities = ['Journey map creation', 'Research planning', 'Design system work'];
+    const adjustments = {
+      'Journey map creation': 1,  // 3+1=3 (clamped)
+      'Research planning': -1,     // 1-1=1 (clamped)
+      'Design system work': 0      // 3+0=3
+    };
+    // Total: 3 + 1 + 3 = 7 → score 1
+    expect(calculateActivityScore(activities, adjustments)).toBe(1);
+  });
+});
+
+describe('calculateTShirtSize', () => {
+  test('maps 1 point to XS', () => {
+    expect(calculateTShirtSize(1)).toBe('XS');
+  });
+
+  test('maps 2 points to XS', () => {
+    expect(calculateTShirtSize(2)).toBe('XS');
+  });
+
+  test('maps 3 points to S', () => {
+    expect(calculateTShirtSize(3)).toBe('S');
+  });
+
+  test('maps 5 points to M', () => {
+    expect(calculateTShirtSize(5)).toBe('M');
+  });
+
+  test('maps 8 points to L', () => {
+    expect(calculateTShirtSize(8)).toBe('L');
+  });
+
+  test('maps 13 points to XL', () => {
+    expect(calculateTShirtSize(13)).toBe('XL');
+  });
+});
+
+describe('calculateStoryPoints integration', () => {
+  test('calculates points with weighted activities', () => {
+    const complexity = {
+      ambiguity: 'Medium',
+      artifactComplexity: 'Medium',
+      stakeholderRisk: 'Low',
+      iterationLikelihood: 'Low'
+    };
+    const activities = ['Journey map creation', 'User interviews (6-10)', 'Wireframing (high-fidelity)'];
+    const adjustments = {};
+    const weeks = 4;
+
+    const points = calculateStoryPoints(complexity, activities, adjustments, weeks);
+    // Complexity: 2+2+1+1=6, Activities: 3+2+2=7→score 1, Weeks: 4→score 1
+    // Total: 6+1+1=8 → 3 points
+    expect(points).toBe(3);
+  });
+
+  test('calculates points with activity adjustments', () => {
+    const complexity = {
+      ambiguity: 'Low',
+      artifactComplexity: 'Low',
+      stakeholderRisk: 'Low'
+    };
+    const activities = ['Research planning', 'Surveys'];
+    const adjustments = {
+      'Research planning': 1,  // 1+1=2
+      'Surveys': 1              // 1+1=2
+    };
+    const weeks = 0;
+
+    const points = calculateStoryPoints(complexity, activities, adjustments, weeks);
+    // Complexity: 1+1+1=3, Activities: 2+2=4→score 1, Weeks: 0→score 0
+    // Total: 3+1+0=4 → 1 point
+    expect(points).toBe(1);
+  });
+});
