@@ -15,14 +15,16 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Nunito', sans-serif;
 }
 
-.btn-primary {
-  @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium;
-}
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium;
+  }
 
-.btn-secondary {
-  @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-medium border border-gray-300;
-}
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-medium border border-gray-300;
+  }
 
-.btn-destructive {
-  @apply bg-error/10 text-error px-4 py-2 rounded-lg hover:bg-error/20 transition-colors font-medium border border-error/20;
+  .btn-destructive {
+    @apply bg-error/10 text-error px-4 py-2 rounded-lg hover:bg-error/20 transition-colors font-medium border border-error/20;
+  }
 }
