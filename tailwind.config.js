@@ -7,13 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary/Brand colors (Kroger blue)
-        primary: 'rgb(var(--brand-moreProminent-rgb))',
-        'primary-dark': 'rgb(var(--brand-mostProminent-rgb))',
-        'primary-light': 'rgb(var(--brand-lessProminent-rgb))',
+        // Primary/Brand colors (Kroger blue) - matching Capacity Planning app exactly
+        primary: 'oklch(0.38 0.148 261.6)',
+        'primary-dark': 'oklch(0.30 0.148 261.6)',
+        'primary-light': 'oklch(0.50 0.148 261.6)',
 
         // Stage colors
-        discovery: 'rgb(var(--brand-moreProminent-rgb))',
+        discovery: 'oklch(0.38 0.148 261.6)',
         define: 'rgb(var(--special-lessProminent-rgb))',
         design: 'rgb(var(--positive-lessProminent-rgb))',
 
