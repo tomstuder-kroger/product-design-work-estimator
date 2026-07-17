@@ -1,4 +1,4 @@
-@import '../capacity-planning-app/node_modules/mx-web-components/dist/light.css';
+@import './styles/mx-web-components-light.css';
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
