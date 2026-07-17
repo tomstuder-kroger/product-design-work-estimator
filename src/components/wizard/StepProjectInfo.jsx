@@ -116,45 +116,21 @@ export default function StepProjectInfo() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="tShirtSize" className="block text-sm font-medium text-gray-700 mb-1">
-            T-Shirt Size <span className="text-red-500">*</span>
-          </label>
-          <select
-            id="tShirtSize"
-            value={wizardData.tShirtSize}
-            onChange={(e) => updateField('tShirtSize', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-          >
-            <option value="">Select size...</option>
-            <option value="XS">XS - Extra Small</option>
-            <option value="S">S - Small</option>
-            <option value="M">M - Medium</option>
-            <option value="L">L - Large</option>
-            <option value="XL">XL - Extra Large</option>
-          </select>
-          {wizardData.tShirtSize.length === 0 && (
-            <p className="text-gray-500 text-sm mt-1">Required field</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="weeks" className="block text-sm font-medium text-gray-700 mb-1">
-            Duration (Weeks) <span className="text-gray-500 text-sm">(optional)</span>
-          </label>
-          <input
-            type="number"
-            id="weeks"
-            min="0"
-            step="1"
-            value={wizardData.weeks}
-            onChange={(e) => updateField('weeks', e.target.value)}
-            placeholder="e.g., 2"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-          />
-          <p className="text-sm text-gray-500 mt-1">How many weeks allocated?</p>
-        </div>
+      <div>
+        <label htmlFor="weeks" className="block text-sm font-medium text-gray-700 mb-1">
+          Duration (Weeks) <span className="text-gray-500 text-sm">(optional)</span>
+        </label>
+        <input
+          type="number"
+          id="weeks"
+          min="0"
+          step="1"
+          value={wizardData.weeks}
+          onChange={(e) => updateField('weeks', e.target.value)}
+          placeholder="e.g., 2"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+        />
+        <p className="text-sm text-gray-500 mt-1">How many weeks allocated?</p>
       </div>
 
       <div>
@@ -193,7 +169,6 @@ function isStepValid(wizardData) {
     wizardData.portfolio.length > 0 &&
     wizardData.domainTeam.length > 0 &&
     wizardData.stage !== '' &&
-    wizardData.tShirtSize !== '' &&
     (wizardData.weeks === '' || Number(wizardData.weeks) > 0)
   );
 }
