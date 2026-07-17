@@ -43,7 +43,7 @@ export default function WizardStepper() {
                   currentStep === step.number
                     ? 'border-primary bg-primary text-white'
                     : currentStep > step.number
-                    ? 'border-primary bg-blue-50 text-primary'
+                    ? 'border-primary bg-primary/5 text-primary'
                     : 'border-gray-300 bg-white text-gray-500'
                 } ${canNavigateTo(step.number) && currentStep !== step.number ? 'group-hover:border-primary' : ''}`}
               >

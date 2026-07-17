@@ -126,9 +126,9 @@ export default function StepReview() {
       </div>
 
       {/* Calculated Points */}
-      <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
+      <div className="bg-primary/5 border-2 border-primary/20 rounded-lg p-6">
         <h3 className="font-medium text-gray-900 mb-4">Calculated Story Points</h3>
-        <div className="text-6xl font-bold text-blue-600 mb-4">
+        <div className="text-6xl font-bold text-primary mb-4">
           {wizardData.calculatedPoints}
         </div>
         <p className="text-sm text-gray-700">
@@ -177,7 +177,7 @@ export default function StepReview() {
             type="checkbox"
             checked={wizardData.isOverridden}
             onChange={(e) => handleOverrideToggle(e.target.checked)}
-            className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="mt-1 h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
           />
           <div>
             <span className="font-medium text-gray-900">Manually adjust story points</span>
@@ -200,7 +200,7 @@ export default function StepReview() {
                     onClick={() => updateOverride('finalPoints', points)}
                     className={`px-4 py-2 rounded-lg font-medium transition-all ${
                       wizardData.finalPoints === points
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-primary text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -242,7 +242,7 @@ export default function StepReview() {
                 value={wizardData.overrideReason}
                 onChange={(e) => updateOverride('overrideReason', e.target.value)}
                 placeholder="Why are you adjusting the points?"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
               />
             </div>
           </div>

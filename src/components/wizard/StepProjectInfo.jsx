@@ -36,7 +36,7 @@ export default function StepProjectInfo() {
           value={wizardData.projectName}
           onChange={(e) => updateField('projectName', e.target.value)}
           placeholder="e.g., Create onboarding journey map"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
         />
         {wizardData.projectName.length > 0 && wizardData.projectName.length < 3 && (
           <p className="text-red-500 text-sm mt-1">Minimum 3 characters required</p>
@@ -53,7 +53,7 @@ export default function StepProjectInfo() {
           value={wizardData.teamMemberName}
           onChange={(e) => updateField('teamMemberName', e.target.value)}
           placeholder="e.g., Jane Smith"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
         />
         {wizardData.teamMemberName.length === 0 && (
           <p className="text-gray-500 text-sm mt-1">Required field</p>
@@ -70,7 +70,7 @@ export default function StepProjectInfo() {
           value={wizardData.portfolio}
           onChange={(e) => updateField('portfolio', e.target.value)}
           placeholder="e.g., Customer Experience"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
         />
         {wizardData.portfolio.length === 0 && (
           <p className="text-gray-500 text-sm mt-1">Required field</p>
@@ -87,7 +87,7 @@ export default function StepProjectInfo() {
           value={wizardData.domainTeam}
           onChange={(e) => updateField('domainTeam', e.target.value)}
           placeholder="e.g., Mobile App Team"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
         />
         {wizardData.domainTeam.length === 0 && (
           <p className="text-gray-500 text-sm mt-1">Required field</p>
@@ -125,7 +125,7 @@ export default function StepProjectInfo() {
             id="tShirtSize"
             value={wizardData.tShirtSize}
             onChange={(e) => updateField('tShirtSize', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
           >
             <option value="">Select size...</option>
             <option value="XS">XS - Extra Small</option>
@@ -151,7 +151,7 @@ export default function StepProjectInfo() {
             value={wizardData.weeks}
             onChange={(e) => updateField('weeks', e.target.value)}
             placeholder="e.g., 2"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
           />
           <p className="text-sm text-gray-500 mt-1">How many weeks allocated?</p>
         </div>
@@ -168,7 +168,7 @@ export default function StepProjectInfo() {
           value={wizardData.description}
           onChange={(e) => updateField('description', e.target.value)}
           placeholder="Add any additional context..."
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
         />
         <p className="text-sm text-gray-500 mt-1">
           {wizardData.description.length}/500 characters

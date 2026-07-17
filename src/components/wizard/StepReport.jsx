@@ -40,7 +40,7 @@ export default function StepReport() {
       </div>
 
       {/* Story Points Header */}
-      <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg p-8 text-center">
+      <div className="bg-gradient-to-r from-primary to-primary-dark text-white rounded-lg p-8 text-center">
         <div className="text-7xl font-bold mb-2">
           {wizardData.finalPoints}
         </div>
