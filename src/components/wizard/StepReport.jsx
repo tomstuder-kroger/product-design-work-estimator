@@ -39,17 +39,27 @@ export default function StepReport() {
         </p>
       </div>
 
-      {/* Story Points Header */}
-      <div className="bg-gradient-to-r from-primary to-primary-dark text-white rounded-lg p-8 text-center">
-        <div className="text-7xl font-bold mb-2">
-          {wizardData.finalPoints}
+      {/* Summary Grid */}
+      <div className="grid grid-cols-2 gap-6 mb-6">
+        <div className="bg-primary/10 p-4 rounded-lg">
+          <p className="text-sm text-gray-600">Story Points</p>
+          <p className="text-3xl font-bold text-primary">{wizardData.finalPoints}</p>
+          {wizardData.isPointsOverridden && wizardData.calculatedPoints !== wizardData.finalPoints && (
+            <p className="text-xs text-gray-500 mt-1">
+              (calculated: {wizardData.calculatedPoints})
+            </p>
+          )}
         </div>
-        <div className="text-xl">Story Points</div>
-        {wizardData.isOverridden && wizardData.calculatedPoints !== wizardData.finalPoints && (
-          <div className="text-sm mt-2 opacity-90">
-            Calculated: {wizardData.calculatedPoints} → Adjusted to: {wizardData.finalPoints}
-          </div>
-        )}
+
+        <div className="bg-primary/10 p-4 rounded-lg">
+          <p className="text-sm text-gray-600">T-Shirt Size</p>
+          <p className="text-3xl font-bold text-primary">{wizardData.finalTShirtSize}</p>
+          {wizardData.isTShirtOverridden && wizardData.calculatedTShirtSize !== wizardData.finalTShirtSize && (
+            <p className="text-xs text-gray-500 mt-1">
+              (calculated: {wizardData.calculatedTShirtSize})
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Report Content */}
