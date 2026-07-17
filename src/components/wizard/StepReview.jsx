@@ -42,7 +42,11 @@ export default function StepReview() {
               <p><span className="font-medium">Domain/Team:</span> {wizardData.domainTeam}</p>
             </div>
             <div className="flex gap-4 mt-2 text-sm text-gray-600">
-              <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded">
+              <span className={`px-2 py-1 rounded text-white text-xs font-medium ${
+                wizardData.stage === 'Discovery' ? 'bg-discovery' :
+                wizardData.stage === 'Define' ? 'bg-define' :
+                'bg-design'
+              }`}>
                 {wizardData.stage}
               </span>
               <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded">
@@ -56,7 +60,7 @@ export default function StepReview() {
           </div>
           <button
             onClick={() => goToStep(1)}
-            className="text-sm text-blue-600 hover:text-blue-800"
+            className="text-sm text-primary hover:text-primary-dark"
           >
             Edit
           </button>
@@ -79,7 +83,7 @@ export default function StepReview() {
           </div>
           <button
             onClick={() => goToStep(2)}
-            className="text-sm text-blue-600 hover:text-blue-800"
+            className="text-sm text-primary hover:text-primary-dark"
           >
             Edit
           </button>
@@ -114,7 +118,7 @@ export default function StepReview() {
           </div>
           <button
             onClick={() => goToStep(3)}
-            className="text-sm text-blue-600 hover:text-blue-800"
+            className="text-sm text-primary hover:text-primary-dark"
           >
             Edit
           </button>

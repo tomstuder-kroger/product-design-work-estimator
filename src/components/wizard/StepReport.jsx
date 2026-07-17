@@ -76,7 +76,11 @@ export default function StepReport() {
             <div className="flex justify-between text-sm">
               <dt className="text-gray-600">Stage:</dt>
               <dd>
-                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
+                <span className={`px-2 py-1 rounded text-white text-xs font-medium ${
+                  wizardData.stage === 'Discovery' ? 'bg-discovery' :
+                  wizardData.stage === 'Define' ? 'bg-define' :
+                  'bg-design'
+                }`}>
                   {wizardData.stage}
                 </span>
               </dd>
@@ -191,7 +195,7 @@ export default function StepReport() {
       <div className="text-center">
         <button
           onClick={handleNewEstimation}
-          className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+          className="text-primary hover:text-primary-dark text-sm font-medium"
         >
           Start New Estimation
         </button>
