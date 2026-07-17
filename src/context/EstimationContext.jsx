@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { calculateStoryPoints, generateBreakdown } from '../utils/calculations';
+import { calculateStoryPoints, calculateTShirtSize, generateBreakdown } from '../utils/calculations';
 import { saveHistory as saveHistoryToStorage, loadHistory, saveDraft, clearDraft } from '../utils/storage';
 
 const EstimationContext = createContext(null);
@@ -14,6 +14,7 @@ const initialWizardData = {
   weeks: '',
   description: '',
   activities: [],
+  activityAdjustments: {},
   complexity: {
     ambiguity: '',
     artifactComplexity: '',
@@ -22,8 +23,14 @@ const initialWizardData = {
   },
   calculatedPoints: 0,
   finalPoints: 0,
+  calculatedTShirtSize: '',
+  finalTShirtSize: '',
   isOverridden: false,
-  overrideReason: ''
+  isPointsOverridden: false,
+  isTShirtOverridden: false,
+  overrideReason: '',
+  pointsOverrideReason: '',
+  tShirtOverrideReason: ''
 };
 
 export function EstimationProvider({ children }) {
@@ -55,13 +62,17 @@ export function EstimationProvider({ children }) {
   const calculatePoints = () => {
     const points = calculateStoryPoints(
       wizardData.complexity,
-      wizardData.activities.length,
+      wizardData.activities,
+      wizardData.activityAdjustments,
       wizardData.weeks
     );
+    const tShirtSize = calculateTShirtSize(points);
     setWizardData(prev => ({
       ...prev,
       calculatedPoints: points,
-      finalPoints: prev.isOverridden ? prev.finalPoints : points
+      finalPoints: prev.isPointsOverridden ? prev.finalPoints : points,
+      calculatedTShirtSize: tShirtSize,
+      finalTShirtSize: prev.isTShirtOverridden ? prev.finalTShirtSize : tShirtSize
     }));
     return points;
   };
@@ -70,7 +81,26 @@ export function EstimationProvider({ children }) {
     const estimation = {
       id: crypto.randomUUID(),
       timestamp: new Date().toISOString(),
-      ...wizardData,
+      projectName: wizardData.projectName,
+      teamMemberName: wizardData.teamMemberName,
+      portfolio: wizardData.portfolio,
+      domainTeam: wizardData.domainTeam,
+      stage: wizardData.stage,
+      weeks: wizardData.weeks,
+      description: wizardData.description,
+      activities: wizardData.activities,
+      activityAdjustments: wizardData.activityAdjustments,
+      complexity: wizardData.complexity,
+      calculatedPoints: wizardData.calculatedPoints,
+      finalPoints: wizardData.finalPoints,
+      calculatedTShirtSize: wizardData.calculatedTShirtSize,
+      finalTShirtSize: wizardData.finalTShirtSize,
+      isOverridden: wizardData.isOverridden,
+      isPointsOverridden: wizardData.isPointsOverridden,
+      isTShirtOverridden: wizardData.isTShirtOverridden,
+      overrideReason: wizardData.overrideReason,
+      pointsOverrideReason: wizardData.pointsOverrideReason,
+      tShirtOverrideReason: wizardData.tShirtOverrideReason,
       calculationBreakdown: generateBreakdown(wizardData)
     };
 
