@@ -8,12 +8,12 @@ export default {
     extend: {
       colors: {
         // Primary/Brand colors (Kroger blue)
-        primary: 'rgb(var(--brand-mostProminent-rgb))',
-        'primary-dark': 'rgba(0, 0, 0, 0.9)',
+        primary: 'rgb(var(--brand-moreProminent-rgb))',
+        'primary-dark': 'rgb(var(--brand-mostProminent-rgb))',
         'primary-light': 'rgb(var(--brand-lessProminent-rgb))',
 
         // Stage colors
-        discovery: 'rgb(var(--brand-mostProminent-rgb))',
+        discovery: 'rgb(var(--brand-moreProminent-rgb))',
         define: 'rgb(var(--special-lessProminent-rgb))',
         design: 'rgb(var(--positive-lessProminent-rgb))',
 
