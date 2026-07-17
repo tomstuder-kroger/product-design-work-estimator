@@ -22,7 +22,7 @@ export default function StepReview() {
         }));
       }
     }
-  }, [wizardData.finalPoints, wizardData.isTShirtOverridden]);
+  }, [wizardData.finalPoints, wizardData.isTShirtOverridden, wizardData.calculatedTShirtSize, setWizardData]);
 
   const updateOverride = (field, value) => {
     setWizardData(prev => ({ ...prev, [field]: value }));
