@@ -46,7 +46,7 @@ export default function HistoryDetail({ estimation }) {
       <div className="flex items-center gap-2 text-sm">
         <button
           onClick={() => navigate('/history')}
-          className="text-blue-600 hover:text-blue-800"
+          className="text-primary hover:text-primary-dark"
         >
           History
         </button>

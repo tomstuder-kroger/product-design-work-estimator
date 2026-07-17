@@ -190,7 +190,7 @@ export default function HistoryList() {
             <div className="flex gap-2">
               <button
                 onClick={() => navigate(`/history/${estimation.id}`)}
-                className="flex-1 px-3 py-1.5 text-sm bg-blue-50 text-blue-700 rounded hover:bg-blue-100"
+                className="flex-1 px-3 py-1.5 text-sm text-primary hover:text-primary-dark"
               >
                 View
               </button>
