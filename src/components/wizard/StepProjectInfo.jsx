@@ -106,7 +106,7 @@ export default function StepProjectInfo() {
               onClick={() => updateField('stage', stage)}
               className={`p-4 border-2 rounded-lg transition-all ${
                 wizardData.stage === stage
-                  ? 'border-blue-600 bg-blue-50 text-blue-900'
+                  ? 'border-primary bg-primary/10 text-primary'
                   : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
               }`}
             >

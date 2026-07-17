@@ -18,7 +18,7 @@ export default function ActivityCheckboxGrid({ activities, selected, onChange })
             type="checkbox"
             checked={selected.includes(activity)}
             onChange={() => handleToggle(activity)}
-            className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="mt-1 h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
           />
           <span className="ml-3 text-sm text-gray-900">{activity}</span>
         </label>

@@ -21,7 +21,7 @@ export default function ComplexitySelector({ dimension, value, onChange }) {
             onClick={() => onChange(level)}
             className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all ${
               value === level
-                ? 'border-blue-600 bg-blue-50 text-blue-900 font-medium'
+                ? 'border-primary bg-primary/10 text-primary font-medium'
                 : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
             }`}
           >
