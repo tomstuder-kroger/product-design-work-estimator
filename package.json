@@ -1,6 +1,7 @@
 {
-  "name": "story_points",
+  "name": "product-design-work-estimator",
   "version": "1.0.0",
+  "description": "Estimate product design work using story points and T-shirt sizing",
   "type": "module",
   "scripts": {
     "dev": "vite",

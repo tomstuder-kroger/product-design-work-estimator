@@ -27,7 +27,7 @@ export default function Layout({ children }) {
             <div className="flex items-center gap-4">
               <img src={krogerLogo} alt="Kroger" className="h-[33px] w-[60px] object-contain" />
               <h1 className="text-xl font-bold text-white">
-                Story Points Calculator
+                Product Design Work Estimator
               </h1>
             </div>
             <nav className="flex gap-6">
