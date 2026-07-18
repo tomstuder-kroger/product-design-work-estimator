@@ -51,7 +51,7 @@ export default function StepReview() {
       <div>
         <h2 className="text-2xl font-bold text-gray-900">Review & Adjust</h2>
         <p className="text-gray-600 mt-1">
-          Review your inputs and calculated story points
+          Review your inputs and calculated complexity score
         </p>
       </div>
 
@@ -149,14 +149,23 @@ export default function StepReview() {
 
       {/* Calculated Points */}
       <div className="bg-primary/5 border-2 border-primary/20 rounded-lg p-6">
-        <h3 className="font-medium text-gray-900 mb-4">Calculated Story Points</h3>
+        <h3 className="font-medium text-gray-900 mb-4">Calculated Complexity Score</h3>
         <div className="text-6xl font-bold text-primary mb-4">
           {wizardData.calculatedPoints}
         </div>
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-700 mb-4">
           Based on your complexity assessment ({wizardData.activities.length} activities, {wizardData.weeks || 'no'} weeks), this work is estimated at{' '}
-          <strong>{wizardData.calculatedPoints} story points</strong>.
+          <strong>{wizardData.calculatedPoints} points</strong>.
         </p>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+          <p className="text-sm text-blue-900 font-medium mb-2">ℹ️ About This Calculation</p>
+          <p className="text-sm text-blue-800">
+            This is a structured estimation framework for design work, not traditional software story pointing.
+            It brings rigor and explainability to design estimation by using a formula-based approach with weighted
+            inputs across complexity dimensions, activities, and duration. The output helps justify estimates to
+            stakeholders and provides consistent scoring across design projects.
+          </p>
+        </div>
       </div>
 
       {/* Epic-Level Warning */}
@@ -202,7 +211,7 @@ export default function StepReview() {
             className="mt-1 h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
           />
           <div>
-            <span className="font-medium text-gray-900">Manually adjust story points</span>
+            <span className="font-medium text-gray-900">Manually adjust complexity score</span>
             <p className="text-sm text-gray-600 mt-1">
               Override the calculated value if needed
             </p>
@@ -213,7 +222,7 @@ export default function StepReview() {
           <div className="space-y-4 pl-7">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Select Story Points
+                Select Complexity Score
               </label>
               <div className="flex gap-2">
                 {STORY_POINT_SCALE.map((points) => (
@@ -279,7 +288,7 @@ export default function StepReview() {
             {wizardData.calculatedTShirtSize}
           </p>
           <p className="text-sm text-gray-600 mt-1">
-            Based on {wizardData.isPointsOverridden ? wizardData.finalPoints : wizardData.calculatedPoints} story point{(wizardData.isPointsOverridden ? wizardData.finalPoints : wizardData.calculatedPoints) === 1 ? '' : 's'}
+            Based on complexity score of {wizardData.isPointsOverridden ? wizardData.finalPoints : wizardData.calculatedPoints}
           </p>
         </div>
 

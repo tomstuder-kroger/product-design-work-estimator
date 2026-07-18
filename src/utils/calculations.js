@@ -28,8 +28,8 @@ export function calculateActivityScore(selectedActivities, adjustments = {}) {
 }
 
 /**
- * Map story points to T-shirt size
- * @param {number} storyPoints - Story points (1, 2, 3, 5, 8, 13)
+ * Map complexity score to T-shirt size
+ * @param {number} storyPoints - Complexity score (1, 2, 3, 5, 8, 13)
  * @returns {string} T-shirt size ('XS', 'S', 'M', 'L', 'XL')
  */
 export function calculateTShirtSize(storyPoints) {
@@ -41,12 +41,12 @@ export function calculateTShirtSize(storyPoints) {
 }
 
 /**
- * Calculate story points based on complexity dimensions, weighted activities, and duration
+ * Calculate complexity score based on complexity dimensions, weighted activities, and duration
  * @param {Object} complexity - {ambiguity, artifactComplexity, stakeholderRisk, iterationLikelihood?}
  * @param {Array<string>|number} selectedActivities - Array of selected activity names OR legacy activityCount number
  * @param {Object} activityAdjustments - Map of activity name to adjustment (-1, 0, +1)
  * @param {number} weeks - Duration in weeks
- * @returns {number} Story points (1, 2, 3, 5, 8, or 13)
+ * @returns {number} Complexity score (1, 2, 3, 5, 8, or 13)
  */
 export function calculateStoryPoints(complexity, selectedActivities = [], activityAdjustments = {}, weeks = 0) {
   let total = 0;
@@ -120,7 +120,9 @@ export function generateBreakdown(estimation) {
     tShirtOverrideReason
   } = estimation;
 
-  let breakdown = `# Story Points: ${finalPoints}\n\n`;
+  let breakdown = `# Calculated Complexity Score: ${finalPoints}\n\n`;
+
+  breakdown += `> **About this score:** This is a structured estimation framework for design work, not traditional software story pointing. It brings rigor and explainability to design estimation by using a formula-based approach with weighted inputs across complexity dimensions, activities, and duration. The output helps justify estimates to stakeholders and provides consistent scoring across design projects.\n\n`;
 
   if (isOverridden && calculatedPoints !== finalPoints) {
     breakdown += `*Calculated: ${calculatedPoints} → Adjusted to: ${finalPoints}*\n\n`;
@@ -171,7 +173,7 @@ export function generateBreakdown(estimation) {
   if (isTShirtOverridden && calculatedTShirtSize !== finalTShirtSize) {
     breakdown += `**${finalTShirtSize}** *(calculated: ${calculatedTShirtSize}, adjusted)*\n`;
   } else {
-    breakdown += `**${finalTShirtSize}** *(based on ${finalPoints} story point${finalPoints === 1 ? '' : 's'})*\n`;
+    breakdown += `**${finalTShirtSize}** *(based on complexity score of ${finalPoints})*\n`;
   }
 
   breakdown += `\n## Analysis\n\n`;
@@ -182,7 +184,7 @@ export function generateBreakdown(estimation) {
   }
 
   if (isOverridden && overrideReason) {
-    breakdown += `\n**Story Points Adjustment Reason:** ${overrideReason}\n`;
+    breakdown += `\n**Complexity Score Adjustment Reason:** ${overrideReason}\n`;
   }
 
   if (isTShirtOverridden && tShirtOverrideReason) {
@@ -212,7 +214,7 @@ function generateNarrative(complexity, activities, points) {
     if (level === 'High') levels.high++;
   });
 
-  let narrative = `Based on your inputs, this work scores as ${points} story point${points > 1 ? 's' : ''}. `;
+  let narrative = `Based on your inputs, this work has a complexity score of ${points}. `;
 
   if (levels.high >= 2) {
     narrative += `The high complexity across multiple dimensions (${levels.high} high ratings) indicates significant uncertainty and effort. `;
@@ -224,7 +226,7 @@ function generateNarrative(complexity, activities, points) {
 
   const activityCount = activities.length;
   if (activityCount >= 5 && points <= 3) {
-    narrative += `Note: ${activityCount} activities selected, which may indicate higher complexity than the current ${points}-point estimate suggests. `;
+    narrative += `Note: ${activityCount} activities selected, which may indicate higher complexity than the current score of ${points} suggests. `;
   }
 
   return narrative;

@@ -35,14 +35,14 @@ export default function StepReport() {
       <div>
         <h2 className="text-2xl font-bold text-gray-900">Estimation Report</h2>
         <p className="text-gray-600 mt-1">
-          Your story point estimation is complete
+          Your complexity score estimation is complete
         </p>
       </div>
 
       {/* Summary Grid */}
       <div className="grid grid-cols-2 gap-6 mb-6">
         <div className="bg-primary/10 p-4 rounded-lg">
-          <p className="text-sm text-gray-600">Story Points</p>
+          <p className="text-sm text-gray-600">Complexity Score</p>
           <p className="text-3xl font-bold text-primary">{wizardData.finalPoints}</p>
           {wizardData.isPointsOverridden && wizardData.calculatedPoints !== wizardData.finalPoints && (
             <p className="text-xs text-gray-500 mt-1">
