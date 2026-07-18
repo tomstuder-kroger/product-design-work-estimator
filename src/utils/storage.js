@@ -1,6 +1,36 @@
+import { calculateTShirtSize } from './calculations.js';
+
 const HISTORY_KEY = 'storypoint_history';
 const DRAFT_KEY = 'storypoint_draft';
 const MAX_HISTORY_ITEMS = 100;
+
+/**
+ * Migrate old estimation format to new format with activity adjustments and T-shirt size
+ * @param {Object} estimation - Saved estimation object
+ * @returns {Object} Migrated estimation object
+ */
+function migrateEstimation(estimation) {
+  // Already migrated if it has these fields
+  if (estimation.activityAdjustments !== undefined && estimation.calculatedTShirtSize !== undefined) {
+    return estimation;
+  }
+
+  const migrated = {
+    ...estimation,
+    // Add activity adjustments (default to empty/typical)
+    activityAdjustments: estimation.activityAdjustments || {},
+    // Calculate T-shirt size from existing points
+    calculatedTShirtSize: estimation.calculatedTShirtSize || calculateTShirtSize(estimation.calculatedPoints || estimation.finalPoints),
+    finalTShirtSize: estimation.finalTShirtSize || estimation.tShirtSize || calculateTShirtSize(estimation.finalPoints),
+    isTShirtOverridden: estimation.isTShirtOverridden || false,
+    tShirtOverrideReason: estimation.tShirtOverrideReason || '',
+    // Separate points override fields for clarity
+    isPointsOverridden: estimation.isPointsOverridden !== undefined ? estimation.isPointsOverridden : estimation.isOverridden,
+    pointsOverrideReason: estimation.pointsOverrideReason || estimation.overrideReason || ''
+  };
+
+  return migrated;
+}
 
 /**
  * Save history to localStorage
@@ -23,7 +53,11 @@ export function saveHistory(history) {
 export function loadHistory() {
   try {
     const data = localStorage.getItem(HISTORY_KEY);
-    return data ? JSON.parse(data) : [];
+    if (!data) return [];
+
+    const estimations = JSON.parse(data);
+    // Migrate each estimation to new format
+    return estimations.map(migrateEstimation);
   } catch (error) {
     console.error('Failed to load history:', error);
     return [];
