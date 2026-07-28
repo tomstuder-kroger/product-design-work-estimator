@@ -41,6 +41,19 @@ export function calculateTShirtSize(storyPoints) {
 }
 
 /**
+ * Calculate recommended week range based on complexity score
+ * @param {number} storyPoints - Complexity score (1, 2, 3, 5, 8, or 13)
+ * @returns {{min: number, max: number}} Recommended week range
+ */
+export function calculateRecommendedWeeks(storyPoints) {
+  if (storyPoints <= 2) return { min: 1, max: 2 };
+  if (storyPoints === 3) return { min: 2, max: 3 };
+  if (storyPoints === 5) return { min: 3, max: 5 };
+  if (storyPoints === 8) return { min: 5, max: 8 };
+  return { min: 8, max: 12 }; // 13 points
+}
+
+/**
  * Calculate complexity score based on complexity dimensions, weighted activities, and duration
  * @param {Object} complexity - {ambiguity, artifactComplexity, stakeholderRisk, iterationLikelihood?}
  * @param {Array<string>|number} selectedActivities - Array of selected activity names OR legacy activityCount number

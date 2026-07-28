@@ -1,4 +1,4 @@
-import { calculateActivityScore, calculateTShirtSize, calculateStoryPoints } from './calculations.js';
+import { calculateActivityScore, calculateTShirtSize, calculateStoryPoints, calculateRecommendedWeeks } from './calculations.js';
 import { ACTIVITIES_DATA } from './constants.js';
 
 describe('calculateActivityScore', () => {
@@ -134,5 +134,31 @@ describe('calculateStoryPoints integration', () => {
     // Complexity: 1+1+1=3, Activities: 2+2=4→score 1, Weeks: 0→score 0
     // Total: 3+1+0=4 → 1 point
     expect(points).toBe(1);
+  });
+});
+
+describe('calculateRecommendedWeeks', () => {
+  test('returns 1-2 weeks for 1 point', () => {
+    expect(calculateRecommendedWeeks(1)).toEqual({ min: 1, max: 2 });
+  });
+
+  test('returns 1-2 weeks for 2 points', () => {
+    expect(calculateRecommendedWeeks(2)).toEqual({ min: 1, max: 2 });
+  });
+
+  test('returns 2-3 weeks for 3 points', () => {
+    expect(calculateRecommendedWeeks(3)).toEqual({ min: 2, max: 3 });
+  });
+
+  test('returns 3-5 weeks for 5 points', () => {
+    expect(calculateRecommendedWeeks(5)).toEqual({ min: 3, max: 5 });
+  });
+
+  test('returns 5-8 weeks for 8 points', () => {
+    expect(calculateRecommendedWeeks(8)).toEqual({ min: 5, max: 8 });
+  });
+
+  test('returns 8-12 weeks for 13 points', () => {
+    expect(calculateRecommendedWeeks(13)).toEqual({ min: 8, max: 12 });
   });
 });
