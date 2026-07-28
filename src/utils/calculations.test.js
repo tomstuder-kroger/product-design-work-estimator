@@ -1,4 +1,4 @@
-import { calculateActivityScore, calculateTShirtSize, calculateStoryPoints, calculateRecommendedWeeks } from './calculations.js';
+import { calculateActivityScore, calculateTShirtSize, calculateStoryPoints, calculateRecommendedWeeks, validateWeeksEstimate } from './calculations.js';
 import { ACTIVITIES_DATA } from './constants.js';
 
 describe('calculateActivityScore', () => {
@@ -160,5 +160,75 @@ describe('calculateRecommendedWeeks', () => {
 
   test('returns 8-12 weeks for 13 points', () => {
     expect(calculateRecommendedWeeks(13)).toEqual({ min: 8, max: 12 });
+  });
+});
+
+describe('validateWeeksEstimate', () => {
+  test('returns severity none when no weeks entered', () => {
+    const result = validateWeeksEstimate('', 5);
+    expect(result.severity).toBe('none');
+    expect(result.message).toBe('');
+  });
+
+  test('returns severity none when within recommended range', () => {
+    const result = validateWeeksEstimate(4, 5); // 5 points recommends 3-5 weeks
+    expect(result.severity).toBe('none');
+    expect(result.recommendation).toEqual({ min: 3, max: 5 });
+    expect(result.message).toBe('');
+  });
+
+  test('returns severity info when below recommended but within tolerance', () => {
+    const result = validateWeeksEstimate(2, 5); // 5 points recommends 3-5, tolerance 2.1-6.5 → 2-7
+    expect(result.severity).toBe('info');
+    expect(result.message).toContain('on the low end');
+    expect(result.message).toContain('3-5 weeks');
+  });
+
+  test('returns severity info when above recommended but within tolerance', () => {
+    const result = validateWeeksEstimate(6, 5); // 5 points recommends 3-5, tolerance 2.1-6.5 → 2-7
+    expect(result.severity).toBe('info');
+    expect(result.message).toContain('on the high end');
+    expect(result.message).toContain('3-5 weeks');
+  });
+
+  test('returns severity warning when below tolerance', () => {
+    const result = validateWeeksEstimate(1, 5); // 5 points, tolerance min is 2
+    expect(result.severity).toBe('warning');
+    expect(result.message).toContain('too short');
+    expect(result.message).toContain('3-5 weeks');
+  });
+
+  test('returns severity warning when above tolerance', () => {
+    const result = validateWeeksEstimate(8, 5); // 5 points, tolerance max is 7
+    expect(result.severity).toBe('warning');
+    expect(result.message).toContain('too long');
+    expect(result.message).toContain('3-5 weeks');
+  });
+
+  test('returns severity warning for zero weeks', () => {
+    const result = validateWeeksEstimate(0, 5);
+    expect(result.severity).toBe('warning');
+    expect(result.message).toContain('unrealistic');
+  });
+
+  test('handles decimal weeks correctly', () => {
+    const result = validateWeeksEstimate(2.5, 3); // 3 points recommends 2-3 weeks
+    expect(result.severity).toBe('none');
+  });
+
+  test('validates 1-point task correctly', () => {
+    const result = validateWeeksEstimate(1, 1); // 1 point recommends 1-2 weeks
+    expect(result.severity).toBe('none');
+  });
+
+  test('validates 13-point task correctly', () => {
+    const result = validateWeeksEstimate(10, 13); // 13 points recommends 8-12 weeks
+    expect(result.severity).toBe('none');
+  });
+
+  test('warns on significant underestimate for 8-point task', () => {
+    const result = validateWeeksEstimate(2, 8); // 8 points recommends 5-8, tolerance 3.5-10.4 → 3-11
+    expect(result.severity).toBe('warning');
+    expect(result.message).toContain('too short');
   });
 });
