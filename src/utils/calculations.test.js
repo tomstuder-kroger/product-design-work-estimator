@@ -1,4 +1,4 @@
-import { calculateActivityScore, calculateTShirtSize, calculateStoryPoints, calculateRecommendedWeeks, validateWeeksEstimate } from './calculations.js';
+import { calculateActivityScore, calculateTShirtSize, calculateStoryPoints, calculateRecommendedWeeks, validateWeeksEstimate, generateBreakdown } from './calculations.js';
 import { ACTIVITIES_DATA } from './constants.js';
 
 describe('calculateActivityScore', () => {
@@ -230,5 +230,77 @@ describe('validateWeeksEstimate', () => {
     const result = validateWeeksEstimate(2, 8); // 8 points recommends 5-8, tolerance 3.5-10.4 → 3-11
     expect(result.severity).toBe('warning');
     expect(result.message).toContain('too short');
+  });
+});
+
+describe('generateBreakdown with time validation', () => {
+  test('includes time analysis when weeks are specified', () => {
+    const estimation = {
+      finalPoints: 5,
+      calculatedPoints: 5,
+      complexity: {
+        ambiguity: 'Medium',
+        artifactComplexity: 'Medium',
+        stakeholderRisk: 'Low'
+      },
+      activities: ['User interviews', 'Wireframing'],
+      activityAdjustments: {},
+      weeks: 4,
+      isOverridden: false,
+      finalTShirtSize: 'M',
+      calculatedTShirtSize: 'M',
+      isTShirtOverridden: false
+    };
+
+    const breakdown = generateBreakdown(estimation);
+    expect(breakdown).toContain('## Time Estimate Analysis');
+    expect(breakdown).toContain('**Your Estimate:** 4 weeks');
+    expect(breakdown).toContain('**Recommended Range:** 3-5 weeks');
+  });
+
+  test('shows not specified when weeks not entered', () => {
+    const estimation = {
+      finalPoints: 5,
+      calculatedPoints: 5,
+      complexity: {
+        ambiguity: 'Medium',
+        artifactComplexity: 'Medium',
+        stakeholderRisk: 'Low'
+      },
+      activities: ['User interviews'],
+      activityAdjustments: {},
+      weeks: '',
+      isOverridden: false,
+      finalTShirtSize: 'M',
+      calculatedTShirtSize: 'M',
+      isTShirtOverridden: false
+    };
+
+    const breakdown = generateBreakdown(estimation);
+    expect(breakdown).toContain('## Time Estimate Analysis');
+    expect(breakdown).toContain('**Your Estimate:** Not specified');
+  });
+
+  test('includes validation warning for mismatched estimate', () => {
+    const estimation = {
+      finalPoints: 8,
+      calculatedPoints: 8,
+      complexity: {
+        ambiguity: 'High',
+        artifactComplexity: 'High',
+        stakeholderRisk: 'High'
+      },
+      activities: ['Design system work', 'Journey map creation'],
+      activityAdjustments: {},
+      weeks: 2,
+      isOverridden: false,
+      finalTShirtSize: 'L',
+      calculatedTShirtSize: 'L',
+      isTShirtOverridden: false
+    };
+
+    const breakdown = generateBreakdown(estimation);
+    expect(breakdown).toContain('⚠️');
+    expect(breakdown).toContain('shorter than typical');
   });
 });

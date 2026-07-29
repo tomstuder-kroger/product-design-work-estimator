@@ -267,8 +267,21 @@ export function generateBreakdown(estimation) {
   breakdown += `\n## Analysis\n\n`;
   breakdown += generateNarrative(complexity, activities, finalPoints);
 
+  breakdown += `\n## Time Estimate Analysis\n\n`;
+
+  const timeValidation = validateWeeksEstimate(weeks, finalPoints);
+
   if (weeks) {
-    breakdown += `\n\n**Estimated Duration:** ${weeks} week${weeks > 1 ? 's' : ''}\n`;
+    breakdown += `**Your Estimate:** ${weeks} week${weeks > 1 ? 's' : ''}\n`;
+  } else {
+    breakdown += `**Your Estimate:** Not specified\n`;
+  }
+
+  breakdown += `**Recommended Range:** ${timeValidation.recommendation.min}-${timeValidation.recommendation.max} weeks (based on ${finalPoints}-point complexity)\n`;
+
+  if (timeValidation.severity === 'info' || timeValidation.severity === 'warning') {
+    const comparison = weeks < timeValidation.recommendation.min ? 'shorter' : 'longer';
+    breakdown += `\n⚠️ Your estimate is ${comparison} than typical for this complexity level. Consider whether additional factors justify this timeline.\n`;
   }
 
   if (isOverridden && overrideReason) {
