@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEstimation } from '../../context/EstimationContext';
-import { generateBreakdown } from '../../utils/calculations';
+import { generateBreakdown, validateWeeksEstimate } from '../../utils/calculations';
 
 export default function StepReport() {
   const { wizardData, saveEstimation, resetWizard } = useEstimation();
@@ -9,6 +9,7 @@ export default function StepReport() {
   const [copied, setCopied] = useState(false);
 
   const breakdown = generateBreakdown(wizardData);
+  const timeValidation = validateWeeksEstimate(wizardData.weeks, wizardData.finalPoints);
 
   const handleCopy = async () => {
     try {
@@ -149,6 +150,36 @@ export default function StepReport() {
               <li key={activity} className="text-sm text-gray-700">• {activity}</li>
             ))}
           </ul>
+        </div>
+
+        {/* Time Estimate Analysis */}
+        <div className="border-t pt-6">
+          <h3 className="font-semibold text-gray-900 mb-2">Time Estimate Analysis</h3>
+          <dl className="space-y-1 text-sm">
+            <div className="flex justify-between">
+              <dt className="text-gray-600">Your Estimate:</dt>
+              <dd className="font-medium">
+                {wizardData.weeks ? `${wizardData.weeks} week${wizardData.weeks > 1 ? 's' : ''}` : 'Not specified'}
+              </dd>
+            </div>
+            <div className="flex justify-between">
+              <dt className="text-gray-600">Recommended Range:</dt>
+              <dd className="font-medium">
+                {timeValidation.recommendation.min}-{timeValidation.recommendation.max} weeks
+                <span className="text-gray-500 font-normal ml-1">
+                  (based on {wizardData.finalPoints}-point complexity)
+                </span>
+              </dd>
+            </div>
+          </dl>
+          {(timeValidation.severity === 'info' || timeValidation.severity === 'warning') && (
+            <div className="mt-3 bg-amber-50 border border-amber-200 rounded p-3">
+              <p className="text-sm text-amber-900">
+                ⚠️ Your estimate is {wizardData.weeks < timeValidation.recommendation.min ? 'shorter' : 'longer'} than typical for this complexity level.
+                Consider whether additional factors justify this timeline.
+              </p>
+            </div>
+          )}
         </div>
 
         {wizardData.finalPoints === 13 && (
