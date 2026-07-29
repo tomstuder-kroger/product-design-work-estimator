@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useEstimation } from '../../context/EstimationContext';
 import { STORY_POINT_SCALE } from '../../utils/constants';
-import { calculateTShirtSize } from '../../utils/calculations';
+import { calculateTShirtSize, validateWeeksEstimate } from '../../utils/calculations';
 
 export default function StepReview() {
   const { wizardData, setWizardData, calculatePoints, goToStep } = useEstimation();
@@ -23,6 +23,9 @@ export default function StepReview() {
       }
     }
   }, [wizardData.finalPoints, wizardData.isTShirtOverridden, wizardData.calculatedTShirtSize, setWizardData]);
+
+  // Calculate time validation
+  const timeValidation = validateWeeksEstimate(wizardData.weeks, wizardData.finalPoints);
 
   const updateOverride = (field, value) => {
     setWizardData(prev => ({ ...prev, [field]: value }));
@@ -88,6 +91,25 @@ export default function StepReview() {
           </button>
         </div>
       </div>
+
+      {/* Time Validation Banner */}
+      {timeValidation.severity === 'info' && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <p className="text-sm text-blue-900 flex items-start gap-2">
+            <span className="text-lg">ℹ️</span>
+            <span>{timeValidation.message}</span>
+          </p>
+        </div>
+      )}
+
+      {timeValidation.severity === 'warning' && (
+        <div className="bg-amber-50 border border-amber-300 rounded-lg p-4">
+          <p className="text-sm text-amber-900 flex items-start gap-2">
+            <span className="text-lg">⚠️</span>
+            <span>{timeValidation.message}</span>
+          </p>
+        </div>
+      )}
 
       {/* Activities */}
       <div className="bg-white border rounded-lg p-6 space-y-4">
