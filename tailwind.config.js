@@ -5,39 +5,84 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
-        // Primary/Brand colors (Kroger blue) - matching Capacity Planning app exactly
-        primary: 'oklch(0.38 0.148 261.6)',
-        'primary-dark': 'oklch(0.30 0.148 261.6)',
-        'primary-light': 'oklch(0.50 0.148 261.6)',
-
-        // Stage colors
-        discovery: 'oklch(0.38 0.148 261.6)',
-        define: 'rgb(var(--special-lessProminent-rgb))',
-        design: 'rgb(var(--positive-lessProminent-rgb))',
-
-        // Semantic colors
-        success: 'rgb(var(--positive-lessProminent-rgb))',
-        warning: 'rgb(var(--callout-lessProminent-rgb))',
-        error: 'rgb(var(--negative-lessProminent-rgb))',
-
-        // Neutral colors (grays)
-        gray: {
-          50: 'rgb(var(--neutral-mostSubtle-rgb))',
-          100: 'rgb(var(--neutral-moreSubtle-rgb))',
-          200: 'rgb(var(--neutral-lessSubtle-rgb))',
-          300: 'rgb(var(--neutral-leastSubtle-rgb))',
-          400: 'rgb(var(--neutral-leastProminent-rgb))',
-          500: 'rgb(var(--neutral-lessProminent-rgb))',
-          600: 'rgb(var(--neutral-moreProminent-rgb))',
-          700: 'rgb(var(--neutral-mostProminent-rgb))',
-          900: 'rgb(var(--system-text-rgb))',
+        // shadcn/ui base colors
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
         },
       },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
       fontFamily: {
-        sans: ['DM Sans', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', '"Helvetica Neue"', 'sans-serif'],
         heading: ['Nunito', 'sans-serif'],
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },

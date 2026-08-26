@@ -12,7 +12,14 @@ const MAX_HISTORY_ITEMS = 100;
 function migrateEstimation(estimation) {
   // Already migrated if it has these fields
   if (estimation.activityAdjustments !== undefined && estimation.calculatedTShirtSize !== undefined) {
-    return estimation;
+    // Check if new fields need to be added
+    const needsNewFields = estimation.assignee === undefined ||
+                           estimation.priority === undefined ||
+                           estimation.dependencies === undefined;
+
+    if (!needsNewFields) {
+      return estimation;
+    }
   }
 
   const migrated = {
@@ -26,7 +33,12 @@ function migrateEstimation(estimation) {
     tShirtOverrideReason: estimation.tShirtOverrideReason || '',
     // Separate points override fields for clarity
     isPointsOverridden: estimation.isPointsOverridden !== undefined ? estimation.isPointsOverridden : estimation.isOverridden,
-    pointsOverrideReason: estimation.pointsOverrideReason || estimation.overrideReason || ''
+    pointsOverrideReason: estimation.pointsOverrideReason || estimation.overrideReason || '',
+    // Add new fields with defaults
+    assignee: estimation.assignee || '',
+    priority: estimation.priority || '',
+    dependencies: estimation.dependencies || [],
+    customDependencies: estimation.customDependencies || []
   };
 
   return migrated;

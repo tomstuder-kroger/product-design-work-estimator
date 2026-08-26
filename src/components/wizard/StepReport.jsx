@@ -76,6 +76,12 @@ export default function StepReport() {
               <dt className="text-gray-600">Team Member:</dt>
               <dd className="font-medium">{wizardData.teamMemberName}</dd>
             </div>
+            {wizardData.assignee && (
+              <div className="flex justify-between text-sm">
+                <dt className="text-gray-600">Assignee:</dt>
+                <dd className="font-medium">{wizardData.assignee}</dd>
+              </div>
+            )}
             <div className="flex justify-between text-sm">
               <dt className="text-gray-600">Portfolio:</dt>
               <dd className="font-medium">{wizardData.portfolio}</dd>
@@ -83,6 +89,18 @@ export default function StepReport() {
             <div className="flex justify-between text-sm">
               <dt className="text-gray-600">Domain/Team:</dt>
               <dd className="font-medium">{wizardData.domainTeam}</dd>
+            </div>
+            <div className="flex justify-between text-sm">
+              <dt className="text-gray-600">Priority:</dt>
+              <dd>
+                <span className={`px-2 py-1 rounded text-white text-xs font-medium ${
+                  wizardData.priority === 'High' ? 'bg-red-600' :
+                  wizardData.priority === 'Medium' ? 'bg-yellow-600' :
+                  'bg-green-600'
+                }`}>
+                  {wizardData.priority}
+                </span>
+              </dd>
             </div>
             <div className="flex justify-between text-sm">
               <dt className="text-gray-600">Stage:</dt>
@@ -151,6 +169,24 @@ export default function StepReport() {
             ))}
           </ul>
         </div>
+
+        {(wizardData.dependencies.length > 0 || wizardData.customDependencies.length > 0) && (
+          <div className="border-t pt-6">
+            <h3 className="font-semibold text-gray-900 mb-2">Dependencies</h3>
+            <div className="flex flex-wrap gap-2">
+              {wizardData.dependencies.map((dep) => (
+                <span key={dep} className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
+                  {dep}
+                </span>
+              ))}
+              {wizardData.customDependencies.map((dep) => (
+                <span key={dep} className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
+                  {dep}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Time Estimate Analysis */}
         <div className="border-t pt-6">

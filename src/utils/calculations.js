@@ -205,7 +205,11 @@ export function generateBreakdown(estimation) {
     finalTShirtSize,
     calculatedTShirtSize,
     isTShirtOverridden,
-    tShirtOverrideReason
+    tShirtOverrideReason,
+    assignee,
+    priority,
+    dependencies = [],
+    customDependencies = []
   } = estimation;
 
   let breakdown = `# Calculated Complexity Score: ${finalPoints}\n\n`;
@@ -257,7 +261,22 @@ export function generateBreakdown(estimation) {
     return `- ${a}`;
   }).join('\n');
 
-  breakdown += `\n\n## T-Shirt Size\n\n`;
+  // Add dependencies section if present
+  if (dependencies.length > 0 || customDependencies.length > 0) {
+    breakdown += `\n\n## Dependencies\n\n`;
+    const allDependencies = [...dependencies, ...customDependencies];
+    breakdown += allDependencies.map(d => `- ${d}`).join('\n');
+  }
+
+  breakdown += `\n\n## Project Metadata\n\n`;
+  if (assignee) {
+    breakdown += `**Assignee:** ${assignee}\n`;
+  }
+  if (priority) {
+    breakdown += `**Priority:** ${priority}\n`;
+  }
+
+  breakdown += `\n## T-Shirt Size\n\n`;
   if (isTShirtOverridden && calculatedTShirtSize !== finalTShirtSize) {
     breakdown += `**${finalTShirtSize}** *(calculated: ${calculatedTShirtSize}, adjusted)*\n`;
   } else {
