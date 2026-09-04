@@ -191,6 +191,6 @@ export const PRIORITY_OPTIONS = ['High', 'Medium', 'Low'];
 export const DEPENDENCY_OPTIONS = [
   'Service Designer',
   'Researcher',
-  'Shared Services',
-  'Another Designer'
+  'Product Designer',
+  'Another Project'
 ];

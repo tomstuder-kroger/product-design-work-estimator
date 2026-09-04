@@ -19,6 +19,7 @@ const initialWizardData = {
   activityAdjustments: {},
   dependencies: [],
   customDependencies: [],
+  dependencyDetails: '',
   complexity: {
     ambiguity: '',
     artifactComplexity: '',
@@ -98,6 +99,7 @@ export function EstimationProvider({ children }) {
       activityAdjustments: wizardData.activityAdjustments,
       dependencies: wizardData.dependencies,
       customDependencies: wizardData.customDependencies,
+      dependencyDetails: wizardData.dependencyDetails,
       complexity: wizardData.complexity,
       calculatedPoints: wizardData.calculatedPoints,
       finalPoints: wizardData.finalPoints,

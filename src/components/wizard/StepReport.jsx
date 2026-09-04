@@ -185,6 +185,9 @@ export default function StepReport() {
                 </span>
               ))}
             </div>
+            {wizardData.dependencyDetails && (
+              <p className="text-sm text-gray-700 mt-3 whitespace-pre-wrap">{wizardData.dependencyDetails}</p>
+            )}
           </div>
         )}
 
