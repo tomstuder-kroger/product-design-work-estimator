@@ -12,7 +12,6 @@ export default function StepProjectInfo() {
     return (
       wizardData.projectName.length >= 3 &&
       wizardData.teamMemberName.length > 0 &&
-      wizardData.portfolio.length > 0 &&
       wizardData.domainTeam.length > 0 &&
       wizardData.priority !== '' &&
       wizardData.stage !== '' &&
@@ -29,7 +28,7 @@ export default function StepProjectInfo() {
 
       <div>
         <label htmlFor="projectName" className="block text-sm font-medium text-gray-700 mb-1">
-          Project/Task Name <span className="text-red-500">*</span>
+          Title / Summary <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -46,7 +45,7 @@ export default function StepProjectInfo() {
 
       <div>
         <label htmlFor="teamMemberName" className="block text-sm font-medium text-gray-700 mb-1">
-          Team Member Name <span className="text-red-500">*</span>
+          Reporter <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -77,7 +76,7 @@ export default function StepProjectInfo() {
 
       <div>
         <label htmlFor="portfolio" className="block text-sm font-medium text-gray-700 mb-1">
-          Portfolio <span className="text-red-500">*</span>
+          Portfolio
         </label>
         <input
           type="text"
@@ -87,21 +86,18 @@ export default function StepProjectInfo() {
           placeholder="e.g., Customer Experience"
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
         />
-        {wizardData.portfolio.length === 0 && (
-          <p className="text-gray-500 text-sm mt-1">Required field</p>
-        )}
       </div>
 
       <div>
         <label htmlFor="domainTeam" className="block text-sm font-medium text-gray-700 mb-1">
-          Domain/Team <span className="text-red-500">*</span>
+          Team <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
           id="domainTeam"
           value={wizardData.domainTeam}
           onChange={(e) => updateField('domainTeam', e.target.value)}
-          placeholder="e.g., Mobile App Team"
+          placeholder="e.g., F-ITEM-PIM Deprecation-Ready Set Deliver"
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
         />
         {wizardData.domainTeam.length === 0 && (
@@ -203,7 +199,6 @@ function isStepValid(wizardData) {
   return (
     wizardData.projectName.length >= 3 &&
     wizardData.teamMemberName.length > 0 &&
-    wizardData.portfolio.length > 0 &&
     wizardData.domainTeam.length > 0 &&
     wizardData.priority !== '' &&
     wizardData.stage !== '' &&

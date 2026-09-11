@@ -101,11 +101,11 @@ export default function HistoryDetail({ estimation }) {
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Project Details</h2>
           <dl className="space-y-3">
             <div>
-              <dt className="text-sm text-gray-600 mb-1">Project Name</dt>
+              <dt className="text-sm text-gray-600 mb-1">Title / Summary</dt>
               <dd className="text-gray-900 font-medium">{estimation.projectName}</dd>
             </div>
             <div>
-              <dt className="text-sm text-gray-600 mb-1">Team Member</dt>
+              <dt className="text-sm text-gray-600 mb-1">Reporter</dt>
               <dd className="text-gray-900 font-medium">{estimation.teamMemberName}</dd>
             </div>
             <div>
@@ -113,7 +113,7 @@ export default function HistoryDetail({ estimation }) {
               <dd className="text-gray-900 font-medium">{estimation.portfolio}</dd>
             </div>
             <div>
-              <dt className="text-sm text-gray-600 mb-1">Domain/Team</dt>
+              <dt className="text-sm text-gray-600 mb-1">Team</dt>
               <dd className="text-gray-900 font-medium">{estimation.domainTeam}</dd>
             </div>
             <div className="flex gap-8">

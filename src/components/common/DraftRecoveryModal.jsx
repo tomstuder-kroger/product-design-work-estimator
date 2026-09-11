@@ -56,7 +56,7 @@ export default function DraftRecoveryModal() {
 
         {draft.wizardData.projectName && (
           <div className="bg-gray-50 rounded p-3">
-            <p className="text-sm text-gray-600">Project:</p>
+            <p className="text-sm text-gray-600">Title / Summary:</p>
             <p className="font-medium text-gray-900">{draft.wizardData.projectName}</p>
           </div>
         )}

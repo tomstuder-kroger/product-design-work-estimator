@@ -69,11 +69,11 @@ export default function StepReport() {
           <h3 className="font-semibold text-gray-900 mb-2">Project Details</h3>
           <dl className="space-y-2">
             <div className="flex justify-between text-sm">
-              <dt className="text-gray-600">Name:</dt>
+              <dt className="text-gray-600">Title / Summary:</dt>
               <dd className="font-medium">{wizardData.projectName}</dd>
             </div>
             <div className="flex justify-between text-sm">
-              <dt className="text-gray-600">Team Member:</dt>
+              <dt className="text-gray-600">Reporter:</dt>
               <dd className="font-medium">{wizardData.teamMemberName}</dd>
             </div>
             {wizardData.assignee && (
@@ -87,7 +87,7 @@ export default function StepReport() {
               <dd className="font-medium">{wizardData.portfolio}</dd>
             </div>
             <div className="flex justify-between text-sm">
-              <dt className="text-gray-600">Domain/Team:</dt>
+              <dt className="text-gray-600">Team:</dt>
               <dd className="font-medium">{wizardData.domainTeam}</dd>
             </div>
             <div className="flex justify-between text-sm">
