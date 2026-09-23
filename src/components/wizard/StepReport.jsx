@@ -108,7 +108,8 @@ export default function StepReport() {
                 <span className={`px-2 py-1 rounded text-white text-xs font-medium ${
                   wizardData.stage === 'Discovery' ? 'bg-discovery' :
                   wizardData.stage === 'Define' ? 'bg-define' :
-                  'bg-design'
+                  wizardData.stage === 'Design' ? 'bg-design' :
+                  'bg-delivery'
                 }`}>
                   {wizardData.stage}
                 </span>

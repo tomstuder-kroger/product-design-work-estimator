@@ -67,6 +67,8 @@ export const ACTIVITIES_DATA = [
   { name: 'Stakeholder Mapping', defaultWeight: 3, stage: 'Discovery', category: 'Understanding/Synthesis' },
   { name: 'Problem framing', defaultWeight: 3, stage: 'Discovery', category: 'Understanding/Synthesis' },
   { name: 'Brainstorm session', defaultWeight: 1, stage: 'Discovery', category: 'Understanding/Synthesis' },
+  { name: 'Discovery Plan', defaultWeight: 2, stage: 'Discovery', category: 'Understanding/Synthesis' },
+  { name: 'Hypothesis Development', defaultWeight: 2, stage: 'Discovery', category: 'Understanding/Synthesis' },
   // Define - Strategic Planning & Framing
   { name: 'Problem statement writing', defaultWeight: 2, stage: 'Define', category: 'Understanding/Synthesis' },
   { name: 'How Might We questions', defaultWeight: 1, stage: 'Define', category: 'Understanding/Synthesis' },
@@ -92,7 +94,11 @@ export const ACTIVITIES_DATA = [
   { name: 'Wireframing', defaultWeight: 2, stage: 'Design', category: 'Making/Prototyping' },
   { name: 'Information architecture', defaultWeight: 2, stage: 'Design', category: 'Making/Prototyping' },
   { name: 'UI mockups', defaultWeight: 2, stage: 'Design', category: 'Making/Prototyping' },
-  { name: 'Clickable prototype', defaultWeight: 2, stage: 'Design', category: 'Making/Prototyping' },
+  { name: 'Interaction Design', defaultWeight: 2, stage: 'Design', category: 'Making/Prototyping' },
+  { name: 'UX Writing', defaultWeight: 2, stage: 'Design', category: 'Making/Prototyping' },
+  { name: 'Low-Fidelity Prototype', defaultWeight: 1, stage: 'Design', category: 'Making/Prototyping' },
+  { name: 'High-Fidelity Prototype', defaultWeight: 3, stage: 'Design', category: 'Making/Prototyping' },
+  { name: 'Annotations (interaction, accessibility, flow)', defaultWeight: 2, stage: 'Design', category: 'Executing/Relationship Management' },
   { name: 'Multi-platform design (responsive)', defaultWeight: 3, stage: 'Design', category: 'Making/Prototyping' },
   { name: 'Accessibility review', defaultWeight: 2, stage: 'Design', category: 'Making/Prototyping' },
   { name: 'Content design', defaultWeight: 1, stage: 'Design', category: 'Making/Prototyping' },
@@ -111,11 +117,15 @@ export const ACTIVITIES_DATA = [
   { name: 'Regular Stakeholder Updates', defaultWeight: 3, stage: 'Design', category: 'Executing/Relationship Management' },
   { name: 'Design Leadership Review', defaultWeight: 3, stage: 'Design', category: 'Executing/Relationship Management' },
   { name: 'Brainstorm session', defaultWeight: 1, stage: 'Design', category: 'Understanding/Synthesis' },
+  // Delivery - Handoff & Launch Support
+  { name: 'Desk Checks', defaultWeight: 1, stage: 'Delivery', category: 'Executing/Relationship Management' },
+  { name: 'Training & Onboarding Documentation', defaultWeight: 2, stage: 'Delivery', category: 'Executing/Relationship Management' },
+  { name: 'User Acceptance Testing (Support)', defaultWeight: 2, stage: 'Delivery', category: 'Looking/Research' },
 ];
 
 /**
  * Get all activities for a specific stage
- * @param {string} stage - 'Discovery', 'Define', or 'Design'
+ * @param {string} stage - 'Discovery', 'Define', 'Design', or 'Delivery'
  * @returns {Array} Array of activity objects for that stage
  */
 export function getActivitiesByStage(stage) {
@@ -154,10 +164,11 @@ export const STORY_POINT_SCALE = [1, 2, 3, 5, 8, 13];
 export const STAGE_COLORS = {
   Discovery: '#3B82F6',
   Define: '#8B5CF6',
-  Design: '#10B981'
+  Design: '#10B981',
+  Delivery: '#F59E0B'
 };
 
-export const STAGE_OPTIONS = ['Discovery', 'Define', 'Design'];
+export const STAGE_OPTIONS = ['Discovery', 'Define', 'Design', 'Delivery'];
 
 export const COMPLEXITY_DIMENSIONS = [
   {

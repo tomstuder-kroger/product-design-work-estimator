@@ -131,7 +131,7 @@ export default function StepProjectInfo() {
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Stage <span className="text-red-500">*</span>
         </label>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {STAGE_OPTIONS.map((stage) => (
             <button
               key={stage}

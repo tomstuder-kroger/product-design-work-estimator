@@ -165,7 +165,8 @@ export default function HistoryList() {
               <span className={`px-2 py-1 text-xs font-medium rounded ${
                 estimation.stage === 'Discovery' ? 'bg-discovery text-white' :
                 estimation.stage === 'Define' ? 'bg-define text-white' :
-                'bg-design text-white'
+                estimation.stage === 'Design' ? 'bg-design text-white' :
+                'bg-delivery text-white'
               }`}>
                 {estimation.stage}
               </span>
