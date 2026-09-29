@@ -1,6 +1,6 @@
 # Phases & Activities
 
-The Work Estimator organizes design work into three phases: **Discovery, Define, and Design**. Each phase has its own set of selectable activities used when scoring a project (see `story-points-calculation.md` for how these feed into the score).
+The Work Estimator organizes design work into four stages: **Discovery, Define, Design, and Delivery**. Each stage has its own set of selectable activities used when scoring a project (see `story-points-calculation.md` for how these feed into the score).
 
 ---
 
@@ -28,6 +28,8 @@ The Work Estimator organizes design work into three phases: **Discovery, Define,
 - Stakeholder Mapping
 - Problem framing
 - Brainstorm session
+- Discovery Plan
+- Hypothesis Development
 
 ## Define
 
@@ -57,7 +59,11 @@ The Work Estimator organizes design work into three phases: **Discovery, Define,
 - Wireframing
 - Information architecture
 - UI mockups
-- Clickable prototype
+- Interaction Design
+- UX Writing
+- Low-Fidelity Prototype
+- High-Fidelity Prototype
+- Annotations (interaction, accessibility, flow)
 - Multi-platform design (responsive)
 - Accessibility review
 - Content design
@@ -76,6 +82,12 @@ The Work Estimator organizes design work into three phases: **Discovery, Define,
 - Regular Stakeholder Updates
 - Design Leadership Review
 - Brainstorm session
+
+## Delivery
+
+- Desk Checks
+- Training & Onboarding Documentation
+- User Acceptance Testing (Support)
 
 ---
 

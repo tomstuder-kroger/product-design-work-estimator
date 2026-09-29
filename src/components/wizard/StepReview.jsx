@@ -135,6 +135,38 @@ export default function StepReview() {
         </div>
       </div>
 
+      {/* Dependencies */}
+      {(wizardData.dependencies.length > 0 || wizardData.customDependencies.length > 0) && (
+        <div className="bg-white border rounded-lg p-6 space-y-4">
+          <div className="flex justify-between items-start">
+            <div className="flex-1">
+              <h3 className="font-medium text-gray-900">Dependencies</h3>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {wizardData.dependencies.map((dep) => (
+                  <span key={dep} className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
+                    {dep}
+                  </span>
+                ))}
+                {wizardData.customDependencies.map((dep) => (
+                  <span key={dep} className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
+                    {dep}
+                  </span>
+                ))}
+              </div>
+              {wizardData.dependencyDetails && (
+                <p className="text-sm text-gray-700 mt-3 whitespace-pre-wrap">{wizardData.dependencyDetails}</p>
+              )}
+            </div>
+            <button
+              onClick={() => goToStep(2)}
+              className="text-sm text-primary hover:text-primary-dark"
+            >
+              Edit
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Complexity */}
       <div className="bg-white border rounded-lg p-6 space-y-4">
         <div className="flex justify-between items-start">
