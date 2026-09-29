@@ -203,5 +203,5 @@ export const DEPENDENCY_OPTIONS = [
   'Service Designer',
   'Researcher',
   'Product Designer',
-  'Another Project'
+  'Accessibility Coach'
 ];
