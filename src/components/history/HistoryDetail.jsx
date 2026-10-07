@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEstimation } from '../../context/EstimationContext';
+import { ACCEPTANCE_CRITERIA_BY_STAGE } from '../../utils/constants';
 
 export default function HistoryDetail({ estimation }) {
   const { loadEstimation, deleteEstimation } = useEstimation();
@@ -149,6 +150,14 @@ export default function HistoryDetail({ estimation }) {
               <div>
                 <dt className="text-sm text-gray-600 mb-1">Description</dt>
                 <dd className="text-gray-900">{estimation.description}</dd>
+              </div>
+            )}
+            {estimation.acceptanceCriteria && (
+              <div>
+                <dt className="text-sm text-gray-600 mb-1">
+                  {ACCEPTANCE_CRITERIA_BY_STAGE[estimation.stage]?.label || 'Acceptance Criteria'}
+                </dt>
+                <dd className="text-gray-900 whitespace-pre-wrap">{estimation.acceptanceCriteria}</dd>
               </div>
             )}
           </dl>

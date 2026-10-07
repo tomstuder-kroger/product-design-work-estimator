@@ -170,6 +170,53 @@ export const STAGE_COLORS = {
 
 export const STAGE_OPTIONS = ['Discovery', 'Define', 'Design', 'Delivery'];
 
+// Acceptance Criteria field in step 1. Label, requirement and starter hints
+// adapt to the selected stage. See docs/acceptance-criteria.md.
+export const ACCEPTANCE_CRITERIA_BY_STAGE = {
+  Discovery: {
+    label: 'Learning goal / exit condition',
+    required: false,
+    hints: [
+      'Research question(s) to be answered',
+      'Minimum evidence needed (e.g. number of participants, sources reviewed)',
+      'Findings shared with the team in a named playback'
+    ]
+  },
+  Define: {
+    label: 'Acceptance Criteria',
+    required: false,
+    hints: [
+      'Problem statement or brief signed off by PM and key stakeholders',
+      'Scope is explicit: what is in and what is out',
+      'Success measures are named',
+      'Open questions logged with an owner'
+    ]
+  },
+  Design: {
+    label: 'Acceptance Criteria',
+    required: true,
+    hints: [
+      'All agreed flows and screens covered, including empty, error and loading states',
+      'Uses design system components; new or custom components flagged',
+      'Meets accessibility basics (contrast, focus order, labels, WCAG level)',
+      'Validated with users or stakeholders; feedback addressed or logged',
+      'Specs and annotations complete enough to build from',
+      'Design review approved by a named reviewer'
+    ]
+  },
+  Delivery: {
+    label: 'Acceptance Criteria',
+    required: true,
+    hints: [
+      'Developer handoff complete and open questions answered',
+      'Build matches design, confirmed in a design QA pass',
+      'Discrepancies logged and triaged; only agreed deviations remain',
+      'Responsive and accessibility behavior verified in the build',
+      'Designer sign-off given before release'
+    ]
+  }
+};
+
 export const COMPLEXITY_DIMENSIONS = [
   {
     key: 'ambiguity',

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useEstimation } from '../../context/EstimationContext';
-import { STORY_POINT_SCALE } from '../../utils/constants';
+import { STORY_POINT_SCALE, ACCEPTANCE_CRITERIA_BY_STAGE } from '../../utils/constants';
 import { calculateTShirtSize, validateWeeksEstimate } from '../../utils/calculations';
 
 export default function StepReview() {
@@ -82,6 +82,14 @@ export default function StepReview() {
             </div>
             {wizardData.description && (
               <p className="text-sm text-gray-600 mt-2">{wizardData.description}</p>
+            )}
+            {wizardData.acceptanceCriteria && (
+              <div className="text-sm text-gray-600 mt-2">
+                <p className="font-medium">
+                  {ACCEPTANCE_CRITERIA_BY_STAGE[wizardData.stage]?.label || 'Acceptance Criteria'}:
+                </p>
+                <p className="whitespace-pre-wrap">{wizardData.acceptanceCriteria}</p>
+              </div>
             )}
           </div>
           <button

@@ -1,5 +1,5 @@
 import { useEstimation } from '../../context/EstimationContext';
-import { STAGE_OPTIONS, PRIORITY_OPTIONS } from '../../utils/constants';
+import { STAGE_OPTIONS, PRIORITY_OPTIONS, ACCEPTANCE_CRITERIA_BY_STAGE } from '../../utils/constants';
 
 export default function StepProjectInfo() {
   const { wizardData, setWizardData } = useEstimation();
@@ -8,16 +8,7 @@ export default function StepProjectInfo() {
     setWizardData(prev => ({ ...prev, [field]: value }));
   };
 
-  const isValid = () => {
-    return (
-      wizardData.projectName.length >= 3 &&
-      wizardData.teamMemberName.length > 0 &&
-      wizardData.domainTeam.length > 0 &&
-      wizardData.priority !== '' &&
-      wizardData.stage !== '' &&
-      (wizardData.weeks === '' || Number(wizardData.weeks) > 0)
-    );
-  };
+  const acConfig = ACCEPTANCE_CRITERIA_BY_STAGE[wizardData.stage];
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -184,6 +175,38 @@ export default function StepProjectInfo() {
         </p>
       </div>
 
+      {acConfig && (
+        <div>
+          <label htmlFor="acceptanceCriteria" className="block text-sm font-medium text-gray-700 mb-1">
+            {acConfig.label}{' '}
+            {acConfig.required ? (
+              <span className="text-red-500">*</span>
+            ) : (
+              <span className="text-gray-500 text-sm">(optional)</span>
+            )}
+          </label>
+          <textarea
+            id="acceptanceCriteria"
+            rows="5"
+            value={wizardData.acceptanceCriteria}
+            onChange={(e) => updateField('acceptanceCriteria', e.target.value)}
+            placeholder="One criterion per line"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+          />
+          {acConfig.required && wizardData.acceptanceCriteria.trim().length === 0 && (
+            <p className="text-gray-500 text-sm mt-1">Required field</p>
+          )}
+          <div className="mt-2 text-sm text-gray-500">
+            <p className="font-medium">Starter ideas:</p>
+            <ul className="list-disc pl-5 mt-1 space-y-0.5">
+              {acConfig.hints.map((hint) => (
+                <li key={hint}>{hint}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
       <div className="pt-4">
         <p className="text-sm text-gray-600">
           <span className="text-red-500">*</span> Required fields
@@ -196,12 +219,14 @@ export default function StepProjectInfo() {
 export { isStepValid as isStep1Valid };
 
 function isStepValid(wizardData) {
+  const acRequired = ACCEPTANCE_CRITERIA_BY_STAGE[wizardData.stage]?.required;
   return (
     wizardData.projectName.length >= 3 &&
     wizardData.teamMemberName.length > 0 &&
     wizardData.domainTeam.length > 0 &&
     wizardData.priority !== '' &&
     wizardData.stage !== '' &&
-    (wizardData.weeks === '' || Number(wizardData.weeks) > 0)
+    (wizardData.weeks === '' || Number(wizardData.weeks) > 0) &&
+    (!acRequired || (wizardData.acceptanceCriteria || '').trim().length > 0)
   );
 }
