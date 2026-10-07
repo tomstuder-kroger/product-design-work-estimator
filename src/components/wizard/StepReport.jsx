@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEstimation } from '../../context/EstimationContext';
 import { generateBreakdown, validateWeeksEstimate } from '../../utils/calculations';
+import { ACCEPTANCE_CRITERIA_BY_STAGE } from '../../utils/constants';
 
 export default function StepReport() {
   const { wizardData, saveEstimation, resetWizard } = useEstimation();
@@ -133,6 +134,14 @@ export default function StepReport() {
               <div className="text-sm">
                 <dt className="text-gray-600 mb-1">Description:</dt>
                 <dd className="text-gray-900">{wizardData.description}</dd>
+              </div>
+            )}
+            {wizardData.acceptanceCriteria && (
+              <div className="text-sm">
+                <dt className="text-gray-600 mb-1">
+                  {ACCEPTANCE_CRITERIA_BY_STAGE[wizardData.stage]?.label || 'Acceptance Criteria'}:
+                </dt>
+                <dd className="text-gray-900 whitespace-pre-wrap">{wizardData.acceptanceCriteria}</dd>
               </div>
             )}
           </dl>
